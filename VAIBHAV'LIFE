@@ -1,0 +1,153 @@
+Here is the complete code combined into a single file. This mimics the viral TikTok version where the "No" button changes text and the "Yes" button grows until it is impossible to ignore.
+
+📋 The Code (HTML + CSS + JavaScript)
+Copy the code block below entirely:
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fce4ec; /* Light pink background */
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #d81b60; /* Deep pink text */
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #4caf50; /* Green */
+            color: white;
+            font-weight: bold;
+        }
+
+        #noBtn {
+            background-color: #f44336; /* Red */
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Animation for the Yes button growing */
+        .grow {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="gif" src="https://media.tenor.com/h5_I96V2phMAAAAi/cute-bear.gif" alt="Cute bear asking">
+        
+        <h1 id="question">Will you be my Valentine?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="handleYes()">Yes</button>
+            <button id="noBtn" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const question = document.getElementById("question");
+        const gif = document.getElementById("gif");
+
+        // Text options when they click "No"
+        const noTexts = [
+            "Are you sure?",
+            "Really sure?",
+            "Think again!",
+            "Last chance!",
+            "Surely not?",
+            "You might regret this!",
+            "Give it another thought!",
+            "Are you absolutely certain?",
+            "This could be a mistake!",
+            "Have a heart!",
+            "Don't be so cold!",
+            "Change of heart?",
+            "Wouldn't you reconsider?",
+            "Is that your final answer?",
+            "You're breaking my heart ;(",
+            "Is that your final answer?",
+            "You're breaking my heart ;(",
+            "Plsss? :("
+        ];
+
+        let clickCount = 0;
+
+        function handleNo() {
+            clickCount++;
+            
+            // 1. Change the text on the No button
+            // If we run out of phrases, keep using the last one
+            if (clickCount < noTexts.length) {
+                noBtn.innerHTML = noTexts[clickCount];
+            } else {
+                noBtn.innerHTML = noTexts[noTexts.length - 1];
+            }
+
+            // 2. Make the Yes button bigger
+            // We increase font size by 10px every click
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = `${currentSize + 20}px`;
+            yesBtn.style.padding = `${currentSize + 10}px ${currentSize + 20}px`;
+        }
+
+        function handleYes() {
+            // 1. Change the header text
+            question.innerHTML = "Yay! I knew you would say yes! ❤️";
+
+            // 2. Change the image to the kissing/happy bears
+            gif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+
+            // 3. Remove the buttons
+            document.querySelector(".buttons").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
